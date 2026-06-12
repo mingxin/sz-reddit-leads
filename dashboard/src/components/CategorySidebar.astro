@@ -1,0 +1,37 @@
+---
+interface Props {
+  counts: Record<string, number>;
+  activeCategory: string;
+}
+
+const { counts, activeCategory } = Astro.props;
+
+const categories = [
+  { key: "all", emoji: "📋", label: "全部" },
+  { key: "tour_guide", emoji: "✈️", label: "旅游向导" },
+  { key: "medical", emoji: "🏥", label: "医疗协助" },
+  { key: "translation", emoji: "🗣️", label: "翻译协助" },
+  { key: "living", emoji: "🏠", label: "生活帮助" },
+];
+
+const totalCount = Object.values(counts).reduce((a, b) => a + b, 0);
+---
+
+<div class="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-title">分类筛选</div>
+    {categories.map((cat) => {
+      const count = cat.key === "all" ? totalCount : (counts[cat.key] || 0);
+      return (
+        <button
+          class={`cat-btn ${activeCategory === cat.key ? "active" : ""}`}
+          data-category={cat.key}
+        >
+          <span class="emoji">{cat.emoji}</span>
+          <span class="label">{cat.label}</span>
+          <span class="badge-count">{count}</span>
+        </button>
+      );
+    })}
+  </div>
+</div>

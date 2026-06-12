@@ -77,6 +77,29 @@ if [ $EXIT_CODE -eq 0 ] && [ -s "$OUTPUT_FILE" ]; then
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] 报告生成成功：$OUTPUT_FILE ($(wc -c < "$OUTPUT_FILE") bytes)" >> "$LOG_FILE"
 else
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] 报告生成失败，退出码: $EXIT_CODE" >> "$LOG_FILE"
+    exit $EXIT_CODE
 fi
 
-exit $EXIT_CODE
+# === Post-scan: 解析报告 → 生成JSON → 推送到GitHub ===
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] 开始解析报告..." >> "$LOG_FILE"
+
+cd "$PROJECT_DIR/dashboard"
+npx tsx scripts/parse-reports.ts >> "$LOG_FILE" 2>&1
+
+if [ $? -eq 0 ]; then
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] 解析成功，开始推送..." >> "$LOG_FILE"
+    cd "$PROJECT_DIR"
+    git add scanner/reports/ dashboard/src/data/
+    git diff --cached --quiet
+    if [ $? -ne 0 ]; then
+        git commit -m "daily: $(date +%Y-%m-%d) report" >> "$LOG_FILE" 2>&1
+        git push origin main >> "$LOG_FILE" 2>&1
+        echo "[$(date '+%Y-%m-%d %H:%M:%S')] 推送完成，GitHub Actions将自动部署" >> "$LOG_FILE"
+    else
+        echo "[$(date '+%Y-%m-%d %H:%M:%S')] 无变更需要提交" >> "$LOG_FILE"
+    fi
+else
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] 解析失败，跳过推送" >> "$LOG_FILE"
+fi
+
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] 全部完成" >> "$LOG_FILE"
