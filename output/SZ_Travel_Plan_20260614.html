@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>深圳一日游 · 2026.06.14 · v4 严格按指定顺序</title>
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg-soft: #131a2a;
+    --accent: #00d9ff;
+    --accent-2: #ff2a6d;
+    --text: #e8eef7;
+    --text-soft: #95a3bd;
+    --border: rgba(0, 217, 255, 0.2);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .hero {
+    background: linear-gradient(135deg, #001a33 0%, #0a0e1a 50%, #1a002a 100%);
+    padding: 60px 24px 80px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0,217,255,0.1) 0%, transparent 50%);
+    animation: pulse 4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+  }
+  .hero h1 {
+    font-size: clamp(28px, 5vw, 56px);
+    font-weight: 800;
+    background: linear-gradient(135deg, #00d9ff 0%, #ff2a6d 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .hero .subtitle {
+    font-size: 18px;
+    color: var(--text-soft);
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .hero .date {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 8px 20px;
+    background: rgba(0, 217, 255, 0.1);
+    border: 1px solid var(--accent);
+    border-radius: 100px;
+    color: var(--accent);
+    font-weight: 600;
+    position: relative;
+  }
+  .hero .version {
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 8px;
+    padding: 4px 12px;
+    background: rgba(255, 42, 109, 0.1);
+    border: 1px solid var(--accent-2);
+    border-radius: 100px;
+    color: var(--accent-2);
+    font-size: 12px;
+    font-weight: 600;
+    position: relative;
+  }
+  .hero .route {
+    display: block;
+    margin-top: 16px;
+    color: var(--text-soft);
+    font-size: 14px;
+    position: relative;
+    line-height: 1.8;
+  }
+  .hero .route strong { color: var(--accent); }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px;
+  }
+
+  .alert {
+    background: linear-gradient(135deg, rgba(255, 42, 109, 0.1), rgba(255, 42, 109, 0.05));
+    border-left: 4px solid var(--accent-2);
+    padding: 20px 24px;
+    border-radius: 8px;
+    margin-bottom: 32px;
+  }
+  .alert h3 {
+    color: var(--accent-2);
+    font-size: 16px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .alert p { color: var(--text-soft); font-size: 14px; margin-bottom: 6px; }
+  .alert p:last-child { margin-bottom: 0; }
+  .alert strong { color: var(--text); }
+
+  .keytime {
+    background: linear-gradient(135deg, rgba(255, 42, 109, 0.15), rgba(255, 42, 109, 0.05));
+    border: 1px solid var(--accent-2);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 32px 0;
+  }
+  .keytime h3 {
+    color: var(--accent-2);
+    font-size: 16px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .keytime p { color: var(--text); font-size: 14px; }
+  .keytime .big { font-size: 24px; font-weight: 800; color: var(--accent-2); }
+
+  .section-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 48px 0 24px;
+    padding-left: 16px;
+    border-left: 4px solid var(--accent);
+  }
+
+  .timeline {
+    position: relative;
+    padding: 20px 0;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  }
+  .timeline-item {
+    position: relative;
+    padding-left: 60px;
+    margin-bottom: 32px;
+  }
+  .timeline-dot {
+    position: absolute;
+    left: 12px;
+    top: 6px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 3px solid var(--accent);
+    box-shadow: 0 0 0 4px rgba(0, 217, 255, 0.2);
+  }
+  .timeline-item.featured .timeline-dot {
+    border-color: var(--accent-2);
+    box-shadow: 0 0 0 4px rgba(255, 42, 109, 0.2);
+  }
+  .timeline-time {
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .timeline-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .timeline-desc {
+    color: var(--text-soft);
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  .timeline-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .tag {
+    display: inline-block;
+    padding: 3px 10px;
+    background: rgba(0, 217, 255, 0.1);
+    color: var(--accent);
+    border-radius: 4px;
+    font-size: 12px;
+    border: 1px solid rgba(0, 217, 255, 0.3);
+  }
+  .tag.warn { background: rgba(255, 42, 109, 0.1); color: var(--accent-2); border-color: rgba(255, 42, 109, 0.3); }
+  .tag.food { background: rgba(255, 165, 0, 0.1); color: #ffa500; border-color: rgba(255, 165, 0, 0.3); }
+  .tag.bar { background: rgba(186, 85, 211, 0.1); color: #ba55d3; border-color: rgba(186, 85, 211, 0.3); }
+  .tag.tech { background: rgba(0, 255, 127, 0.1); color: #00ff7f; border-color: rgba(0, 255, 127, 0.3); }
+  .tag.indoor { background: rgba(255, 200, 0, 0.1); color: #ffc800; border-color: rgba(255, 200, 0, 0.3); }
+  .tag.drone { background: rgba(138, 43, 226, 0.1); color: #8a2be2; border-color: rgba(138, 43, 226, 0.3); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 24px;
+  }
+  .card {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: all 0.3s ease;
+  }
+  .card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .card h4 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: var(--accent);
+  }
+  .card .meta {
+    font-size: 12px;
+    color: var(--text-soft);
+    margin-bottom: 12px;
+  }
+  .card p {
+    font-size: 14px;
+    color: var(--text-soft);
+  }
+  .card .price {
+    margin-top: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .food-grid .card h4 { color: #ffa500; }
+  .bar-grid .card h4 { color: #ba55d3; }
+
+  .timeline-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .timeline-options .card h4 { color: var(--accent); }
+  .timeline-options .card.recommended { border-color: var(--accent-2); }
+  .timeline-options .card.recommended h4 { color: var(--accent-2); }
+  .timeline-options .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    background: var(--accent-2);
+    color: var(--bg);
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  .table th, .table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .table th {
+    background: var(--bg-soft);
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  .table tr:hover { background: rgba(0, 217, 255, 0.03); }
+
+  .checklist {
+    list-style: none;
+    margin: 16px 0;
+  }
+  .checklist li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .checklist input[type="checkbox"] {
+    margin-top: 4px;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent);
+  }
+  .checklist label {
+    color: var(--text-soft);
+    cursor: pointer;
+  }
+  .checklist input:checked + label {
+    text-decoration: line-through;
+    opacity: 0.6;
+  }
+
+  .summary {
+    background: linear-gradient(135deg, var(--bg-soft), rgba(0, 217, 255, 0.05));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 32px;
+  }
+  .summary h3 { color: var(--accent); margin-bottom: 12px; }
+  .summary p { color: var(--text-soft); font-size: 14px; }
+
+  .footer {
+    text-align: center;
+    padding: 40px 24px;
+    color: var(--text-soft);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    margin-top: 60px;
+  }
+
+  .changelog {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    font-size: 13px;
+  }
+  .changelog strong { color: var(--accent); }
+
+  .drone-tip {
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.15), rgba(138, 43, 226, 0.05));
+    border-left: 4px solid #8a2be2;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 16px 0;
+  }
+  .drone-tip h4 { color: #8a2be2; margin-bottom: 8px; font-size: 16px; }
+  .drone-tip p { color: var(--text-soft); font-size: 14px; }
+  .drone-tip strong { color: var(--text); }
+
+  @media (max-width: 640px) {
+    .hero { padding: 40px 20px 60px; }
+    .timeline-item { padding-left: 50px; }
+    .timeline::before { left: 14px; }
+    .timeline-dot { left: 6px; }
+  }
+
+  /* ========== 动态地图模块 ========== */
+  .map-section {
+    background: linear-gradient(180deg, #050811 0%, #0a0e1a 100%);
+    padding: 60px 24px 80px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .map-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 30%, rgba(0, 217, 255, 0.08) 0%, transparent 40%),
+      radial-gradient(circle at 85% 70%, rgba(255, 42, 109, 0.08) 0%, transparent 40%);
+    pointer-events: none;
+  }
+  .map-section h2 {
+    text-align: center;
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .map-section .map-sub {
+    text-align: center;
+    color: var(--text-soft);
+    font-size: 14px;
+    margin-bottom: 32px;
+    position: relative;
+  }
+
+  .map-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* SVG 容器 */
+  .route-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
+  }
+
+  /* 路径动画 */
+  .route-path {
+    fill: none;
+    stroke: rgba(0, 217, 255, 0.15);
+    stroke-width: 2;
+    stroke-dasharray: 6 6;
+    stroke-linecap: round;
+  }
+  .route-path-active {
+    fill: none;
+    stroke: url(#gradient);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+    filter: drop-shadow(0 0 6px rgba(0, 217, 255, 0.6));
+    animation: drawPath 24s linear infinite;
+  }
+  @keyframes drawPath {
+    0% { stroke-dashoffset: 2000; }
+    85% { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: 0; }
+  }
+
+  /* 站点圆圈 */
+  .station {
+    transition: all 0.4s ease;
+    cursor: pointer;
+  }
+  .station-bg {
+    fill: var(--bg-soft);
+    stroke: rgba(0, 217, 255, 0.3);
+    stroke-width: 2;
+    transition: all 0.4s ease;
+  }
+  .station.active .station-bg {
+    fill: rgba(0, 217, 255, 0.15);
+    stroke: var(--accent);
+    stroke-width: 3;
+    filter: drop-shadow(0 0 8px rgba(0, 217, 255, 0.8));
+  }
+  .station.passed .station-bg {
+    fill: rgba(0, 217, 255, 0.08);
+    stroke: rgba(0, 217, 255, 0.5);
+  }
+  .station-number {
+    fill: var(--text-soft);
+    font-size: 14px;
+    font-weight: 700;
+    text-anchor: middle;
+    dominant-baseline: central;
+    transition: all 0.4s ease;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  .station.active .station-number {
+    fill: var(--accent);
+    font-size: 16px;
+  }
+  .station-icon {
+    fill: var(--text-soft);
+    font-size: 18px;
+    text-anchor: middle;
+    dominant-baseline: central;
+    transition: all 0.4s ease;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  .station.active .station-icon {
+    fill: var(--accent);
+  }
+  .station-label {
+    fill: var(--text-soft);
+    font-size: 11px;
+    text-anchor: middle;
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    transition: all 0.4s ease;
+  }
+  .station.active .station-label {
+    fill: var(--accent);
+    font-weight: 800;
+  }
+
+  /* 移动的光点 */
+  .moving-dot {
+    filter: drop-shadow(0 0 8px var(--accent)) drop-shadow(0 0 16px rgba(0, 217, 255, 0.6));
+  }
+  .moving-dot-circle {
+    fill: var(--accent);
+  }
+  .moving-dot-ring {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2;
+    opacity: 0;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  .moving-dot-ring-1 {
+    animation: ringPulse 1.5s ease-out infinite;
+  }
+  .moving-dot-ring-2 {
+    animation: ringPulse 1.5s ease-out 0.5s infinite;
+  }
+  @keyframes ringPulse {
+    0% { r: 6; opacity: 0.8; stroke-width: 3; }
+    100% { r: 18; opacity: 0; stroke-width: 1; }
+  }
+
+  /* 进度标签 */
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 32px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .progress-label {
+    flex: 1;
+    min-width: 130px;
+    padding: 12px 8px;
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-soft);
+    transition: all 0.4s ease;
+  }
+  .progress-label .pl-num {
+    display: block;
+    font-size: 10px;
+    color: var(--text-soft);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.6;
+  }
+  .progress-label .pl-name {
+    display: block;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .progress-label.active {
+    border-color: var(--accent);
+    background: rgba(0, 217, 255, 0.08);
+    box-shadow: 0 0 16px rgba(0, 217, 255, 0.3);
+    transform: scale(1.05);
+  }
+  .progress-label.active .pl-num,
+  .progress-label.active .pl-name {
+    color: var(--accent);
+  }
+  .progress-label.passed {
+    opacity: 0.5;
+  }
+  .progress-label.passed .pl-num {
+    color: var(--accent);
+    opacity: 1;
+  }
+
+  /* 控制条 */
+  .map-controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .map-btn {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    color: var(--text-soft);
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+  }
+  .map-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .map-btn.primary {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .map-btn.primary:hover {
+    background: #00b8d4;
+    color: var(--bg);
+  }
+
+  /* 当前位置显示 */
+  .current-pos {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 14px;
+    color: var(--text-soft);
+  }
+  .current-pos strong {
+    color: var(--accent);
+    font-size: 18px;
+    margin-right: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .map-section { padding: 40px 16px 60px; }
+    .progress-labels { gap: 6px; }
+    .progress-label { min-width: 90px; padding: 8px 4px; }
+    .progress-label .pl-name { font-size: 11px; }
+    .station-label { font-size: 9px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>🛸 Shenzhen · One Day, Future City</h1>
+  <p class="subtitle">带瑞士朋友逛深圳 · 自西向东 6 个核心点</p>
+  <div class="date">2026.06.14 SUN · 10:00–23:00 Route</div>
+  <div class="version">v4 · 严格按指定顺序</div>
+  <span class="route">
+    <strong>1. 前海石公园</strong> → <strong>2. 人才公园（无人机外卖）</strong> → <strong>3. 拓竹（深圳湾万象城 B1）</strong><br>
+    → <strong>4. 大疆欢乐海岸</strong> → <strong>5. 当代艺术与城市规划馆</strong> → <strong>6. 平安 Free Sky</strong>
+  </span>
+</header>
+
+<!-- ========== 动态地图路径 ========== -->
+<section class="map-section">
+  <h2>🗺️ 一日路线 · 动态预览</h2>
+  <p class="map-sub">自西向东 · 6 大核心地标 · 点击下方标签可跳转</p>
+
+  <div class="map-wrap">
+    <svg class="route-svg" viewBox="0 0 1100 360" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#00d9ff"/>
+          <stop offset="50%" stop-color="#7c3aed"/>
+          <stop offset="100%" stop-color="#ff2a6d"/>
+        </linearGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- 背景网格 -->
+      <g opacity="0.06">
+        <line x1="0" y1="80" x2="1100" y2="80" stroke="#00d9ff" stroke-width="0.5"/>
+        <line x1="0" y1="180" x2="1100" y2="180" stroke="#00d9ff" stroke-width="0.5"/>
+        <line x1="0" y1="280" x2="1100" y2="280" stroke="#00d9ff" stroke-width="0.5"/>
+        <line x1="183" y1="0" x2="183" y2="360" stroke="#00d9ff" stroke-width="0.5"/>
+        <line x1="366" y1="0" x2="366" y2="360" stroke="#00d9ff" stroke-width="0.5"/>
+        <line x1="550" y1="0" x2="550" y2="360" stroke="#00d9ff" stroke-width="0.5"/>
+        <line x1="733" y1="0" x2="733" y2="360" stroke="#00d9ff" stroke-width="0.5"/>
+        <line x1="916" y1="0" x2="916" y2="360" stroke="#00d9ff" stroke-width="0.5"/>
+      </g>
+
+      <!-- 西 / 东方向指示 -->
+      <text x="40" y="40" fill="rgba(149, 163, 189, 0.4)" font-size="11" font-weight="600" letter-spacing="2">← 西 / 前海</text>
+      <text x="1060" y="40" fill="rgba(149, 163, 189, 0.4)" font-size="11" font-weight="600" letter-spacing="2" text-anchor="end">福田 / 东 →</text>
+
+      <!-- 路径（虚线背景） -->
+      <path class="route-path" d="M 100 180 Q 200 100, 280 180 T 460 180 T 640 180 T 820 180 T 1000 180"/>
+
+      <!-- 路径（动态绘制的实线） -->
+      <path class="route-path-active" d="M 100 180 Q 200 100, 280 180 T 460 180 T 640 180 T 820 180 T 1000 180" filter="url(#glow)"/>
+
+      <!-- 6 个站点 -->
+      <!-- 站点 1: 前海石公园 -->
+      <g class="station" data-station="0" transform="translate(100, 180)">
+        <circle class="station-bg" r="32"/>
+        <text class="station-icon" y="-6">🌊</text>
+        <text class="station-number" y="14">1</text>
+        <text class="station-label" y="60">前海石公园</text>
+        <text class="station-label" y="76" font-size="9" opacity="0.6">10:00</text>
+      </g>
+
+      <!-- 站点 2: 人才公园 -->
+      <g class="station" data-station="1" transform="translate(280, 180)">
+        <circle class="station-bg" r="32"/>
+        <text class="station-icon" y="-6">🛩️</text>
+        <text class="station-number" y="14">2</text>
+        <text class="station-label" y="60">人才公园</text>
+        <text class="station-label" y="76" font-size="9" opacity="0.6">14:00</text>
+      </g>
+
+      <!-- 站点 3: 拓竹 -->
+      <g class="station" data-station="2" transform="translate(460, 180)">
+        <circle class="station-bg" r="32"/>
+        <text class="station-icon" y="-6">🖨️</text>
+        <text class="station-number" y="14">3</text>
+        <text class="station-label" y="60">拓竹 3D 打印</text>
+        <text class="station-label" y="76" font-size="9" opacity="0.6">15:30</text>
+      </g>
+
+      <!-- 站点 4: 大疆欢乐海岸 -->
+      <g class="station" data-station="3" transform="translate(640, 180)">
+        <circle class="station-bg" r="32"/>
+        <text class="station-icon" y="-6">🚁</text>
+        <text class="station-number" y="14">4</text>
+        <text class="station-label" y="60">大疆欢乐海岸</text>
+        <text class="station-label" y="76" font-size="9" opacity="0.6">17:00</text>
+      </g>
+
+      <!-- 站点 5: 当代艺术馆 -->
+      <g class="station" data-station="4" transform="translate(820, 180)">
+        <circle class="station-bg" r="32"/>
+        <text class="station-icon" y="-6">🏛️</text>
+        <text class="station-number" y="14">5</text>
+        <text class="station-label" y="60">当代艺术馆</text>
+        <text class="station-label" y="76" font-size="9" opacity="0.6">B方案 10:00</text>
+      </g>
+
+      <!-- 站点 6: 平安 Free Sky -->
+      <g class="station" data-station="5" transform="translate(1000, 180)">
+        <circle class="station-bg" r="32"/>
+        <text class="station-icon" y="-6">🏙️</text>
+        <text class="station-number" y="14">6</text>
+        <text class="station-label" y="60">平安 Free Sky</text>
+        <text class="station-label" y="76" font-size="9" opacity="0.6">19:15</text>
+      </g>
+
+      <!-- 移动光点（沿路径运动） -->
+      <g class="moving-dot">
+        <circle class="moving-dot-ring moving-dot-ring-1" cx="0" cy="0" r="6"/>
+        <circle class="moving-dot-ring moving-dot-ring-2" cx="0" cy="0" r="6"/>
+        <circle class="moving-dot-circle" cx="0" cy="0" r="7"/>
+      </g>
+    </svg>
+
+    <!-- 当前位置显示 -->
+    <div class="current-pos">
+      <strong id="currentNum">1</strong>
+      <span id="currentName">前海石公园 · 10:00 出发</span>
+    </div>
+
+    <!-- 进度标签 -->
+    <div class="progress-labels">
+      <div class="progress-label active" data-station="0">
+        <span class="pl-num">STOP 1</span>
+        <span class="pl-name">🌊 前海石公园</span>
+      </div>
+      <div class="progress-label" data-station="1">
+        <span class="pl-num">STOP 2</span>
+        <span class="pl-name">🛩️ 人才公园</span>
+      </div>
+      <div class="progress-label" data-station="2">
+        <span class="pl-num">STOP 3</span>
+        <span class="pl-name">🖨️ 拓竹 3D 打印</span>
+      </div>
+      <div class="progress-label" data-station="3">
+        <span class="pl-num">STOP 4</span>
+        <span class="pl-name">🚁 大疆欢乐海岸</span>
+      </div>
+      <div class="progress-label" data-station="4">
+        <span class="pl-num">STOP 5</span>
+        <span class="pl-name">🏛️ 当代艺术馆</span>
+      </div>
+      <div class="progress-label" data-station="5">
+        <span class="pl-num">STOP 6</span>
+        <span class="pl-name">🏙️ 平安 Free Sky</span>
+      </div>
+    </div>
+
+    <!-- 控制按钮 -->
+    <div class="map-controls">
+      <button class="map-btn" id="mapRestart">↻ 重新播放</button>
+      <button class="map-btn primary" id="mapPause">⏸ 暂停</button>
+    </div>
+  </div>
+</section>
+
+<main class="container">
+
+  <div class="changelog">
+    <strong>🆕 v4 调整：</strong> 严格按你指定的 6 个点顺序（自西向东：前海→后海→深圳湾→欢乐海岸→福田）；<strong>🆕 重要更正</strong>：拓竹在深圳湾万象城 B1，<strong>不是南山万象天地</strong>；新增 <strong>无人机外卖体验</strong>（美团无人机人才公园常态化配送）。
+  </div>
+
+  <div class="alert">
+    <h3>⚠️ 必看前提</h3>
+    <p><strong>天气：</strong>6.14 深圳预报 <strong>大雨 / 28°C / 湿度 91%</strong>，建议备伞 + 出行前 48h 再次核实。</p>
+    <p><strong>预约：</strong>当代艺术与城市规划馆（微信服务号实名）+ 平安 Free Sky（携程/美团）。</p>
+  </div>
+
+  <div class="keytime">
+    <h3>🕒 平安 Free Sky 入园硬约束（多源验证一致）</h3>
+    <p>6.14 周日 · 开放 <strong>10:00-20:00</strong> · <span class="big">19:15 停止入园</span> · 19:45 清场</p>
+    <p style="margin-top:8px;">→ 推荐 <strong>19:00 取票，19:15 准点入园</strong>，2.5 小时看日落+蓝调+夜景，<strong>20:45 出园</strong>。</p>
+  </div>
+
+  <h2 class="section-title">📅 三个时间表 · 选一个</h2>
+  <p style="color: var(--text-soft); font-size: 14px; margin-bottom: 16px;">⚠️ 你给的顺序有个时间冲突：<strong>当代艺术馆 17:30 停止入场</strong>，但你把它放在 Free Sky（19:15 截止）之前。<strong>严格按顺序执行体验不完整</strong>。下面给出 3 个方案：</p>
+
+  <div class="timeline-options">
+    <div class="card">
+      <h4>🅰️ A 方案：严格顺序</h4>
+      <p>10:00 前海石公园 → 12:30 人才公园 → 14:00 拓竹 → 15:15 大疆 → 17:30 当代艺术馆 → 19:30 Free Sky</p>
+      <p style="margin-top: 8px; color: var(--accent-2);">⚠️ 当代艺术馆 17:30 后无法入场，体验不完整。<strong>不推荐</strong>。</p>
+    </div>
+    <div class="card recommended">
+      <span class="badge">⭐ 推荐</span>
+      <h4>🅱️ B 方案：当代艺术馆调到上午</h4>
+      <p>10:00 当代艺术馆 → 12:00 前海石公园 → 14:00 人才公园 → 15:30 拓竹 → 17:00 大疆 → 19:00 Free Sky</p>
+      <p style="margin-top: 8px; color: var(--accent);">✓ 顺序微调，但 6 个点都在。Free Sky 有 2.5h 完整体验。</p>
+    </div>
+    <div class="card">
+      <h4>🅲 C 方案：保留顺序，紧凑化</h4>
+      <p>10:00 前海石公园 → 12:30 人才公园 → 14:00 拓竹 → 15:15 大疆 → <strong>17:00 当代艺术馆（17:00 入场）</strong>→ 19:15 Free Sky</p>
+      <p style="margin-top: 8px; color: var(--accent-2);">⚠️ 当代艺术馆 17:00 入场，1.5h 够核心 2F+3F，17:30 停止入场刚好。</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">⏰ 🅱️ B 方案时间表（推荐）</h2>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-time">10:00 – 11:30</div>
+      <div class="timeline-title">深圳当代艺术与城市规划馆</div>
+      <div class="timeline-desc">蓝天组解构主义建筑，2F 大堂异型钢结构、3F 城市影院。10:00 开门即去，1.5h 看核心。</div>
+      <div class="timeline-tags">
+        <span class="tag warn">需预约</span>
+        <span class="tag tech">解构主义</span>
+        <span class="tag indoor">雨天友好</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-time">11:30 – 12:00</div>
+      <div class="timeline-title">转场到前海石公园</div>
+      <div class="timeline-desc">3/4 号线→5/9 号线前湾站，约 30 分钟。</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-time">12:00 – 13:30</div>
+      <div class="timeline-title">前海石公园</div>
+      <div class="timeline-desc">看"前海石"巨石 + 椰林草坪 + 海景观景平台，**远眺湾区之光摩天轮**。可在公园附近吃简餐。</div>
+      <div class="timeline-tags">
+        <span class="tag">海景</span>
+        <span class="tag">免费</span>
+        <span class="tag">06:00-22:00</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-time">13:30 – 14:00</div>
+      <div class="timeline-title">转场到后海</div>
+      <div class="timeline-desc">5/9 号线→2/11 号线后海站，约 30 分钟。</div>
+    </div>
+
+    <div class="timeline-item featured">
+      <div class="timeline-dot"></div>
+      <div class="timeline-time">14:00 – 15:30</div>
+      <div class="timeline-title">人才公园 + 🛩️ 无人机外卖体验 ⭐</div>
+      <div class="timeline-desc">**美团无人机常态化配送航线**。打开美团 App 搜"美团无人机"→ 选空投柜点餐 → 约 15 分钟送达。边吃边拍春笋机位。</div>
+      <div class="drone-tip">
+        <h4>🛩️ 无人机外卖体验流程</h4>
+        <p>1. 打开**美团 App** → 搜"**美团无人机**"</p>
+        <p>2. 选择最近的**空投柜点**（人才公园内有）</p>
+        <p>3. 下单，**约 15 分钟**送达（比传统外卖快 100%）</p>
+        <p>4. 凭取餐码**秒取餐食**</p>
+        <p>5. 边吃边拍 π桥湖边春笋倒影</p>
+        <p style="margin-top: 6px;"><strong>价格：</strong>汉堡套餐约 40 元起</p>
+        <p><strong>夜间配送截止 20:00</strong>（白天全天可点）</p>
+      </div>
+      <div class="timeline-tags">
+        <span class="tag drone">无人机外卖</span>
+        <span class="tag">低空经济</span>
+        <span class="tag">出片</span>
+      </div>
+    </div>
+
+    <div class="timeline-item featured">
+      <div class="timeline-dot"></div>
+      <div class="timeline-time">15:30 – 16:30</div>
+      <div class="timeline-title">拓竹科技深圳店（深圳湾万象城 B1）⭐</div>
+      <div class="timeline-desc">**全球首家 3D 打印直营旗舰店**。28 台打印机透明墙 + 超大 3D 打印沙盘 + CyberBrick 火车。**创始团队来自大疆**。距人才公园步行 5-8 分钟。</div>
+      <div class="timeline-tags">
+        <span class="tag tech">3D 打印</span>
+        <span class="tag">大疆基因</span>
+        <span class="tag">全球第一</span>
+        <span class="tag">免费看</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-time">16:30 – 17:00</div>
+      <div class="timeline-title">步行/打车到大疆欢乐海岸</div>
+      <div class="timeline-desc">步行 15-20 分钟（800-1000 米），或打车 5 分钟（约 15 元）。</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-time">17:00 – 18:30</div>
+      <div class="timeline-title">大疆欢乐海岸旗舰店</div>
+      <div class="timeline-desc">800㎡ 全球首家旗舰店，飞行演示 + 试飞体验。瑞士朋友可亲手玩无人机。</div>
+      <div class="timeline-tags">
+        <span class="tag tech">无人机</span>
+        <span class="tag">无须预约</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-time">18:30 – 19:00</div>
+      <div class="timeline-title">转场到购物公园</div>
+      <div class="timeline-desc">9 号线→1/3 号线购物公园，约 30 分钟。</div>
+    </div>
+
+    <div class="timeline-item featured">
+      <div class="timeline-dot"></div>
+      <div class="timeline-time">19:00 – 19:15</div>
+      <div class="timeline-title">平安 Free Sky 取票</div>
+      <div class="timeline-desc">D 口左转下沉广场售票处换票。</div>
+      <div class="timeline-tags">
+        <span class="tag warn">19:15 截止入园</span>
+      </div>
+    </div>
+
+    <div class="timeline-item featured">
+      <div class="timeline-dot"></div>
+      <div class="timeline-time">19:15 – 20:45</div>
+      <div class="timeline-title">平安金融中心 Free Sky 云际观光层 ⭐</div>
+      <div class="timeline-desc">599 米深圳第一高楼，116 层云际观光，547 米悬空玻璃观景台（吉尼斯认证）。**2.5 小时窗口**：日落+蓝调+夜晚三段光线全收。</div>
+      <div class="timeline-tags">
+        <span class="tag warn">19:15 截止入园</span>
+        <span class="tag indoor">雨天友好</span>
+        <span class="tag">¥180 线上</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-time">21:00 – 23:00</div>
+      <div class="timeline-title">福田 CBD 晚餐 + 酒吧</div>
+      <div class="timeline-desc">Singer House 餐酒（平安楼下 livehouse）/ AS LOUNGE 23F 顶楼威士忌 / SOLO CLUB 蹦迪。</div>
+      <div class="timeline-tags">
+        <span class="tag food">晚餐</span>
+        <span class="tag bar">夜场</span>
+      </div>
+    </div>
+
+  </div>
+
+  <h2 class="section-title">🏆 6 大核心地标</h2>
+
+  <div class="grid">
+    <div class="card">
+      <h4>1. 前海石公园</h4>
+      <div class="meta">📍 南山区前湾一路西 150 米 · 5/9 号线前湾站</div>
+      <p>深圳改革开放精神地标。"前海石"巨石 + 椰林草坪 + 海景平台，与"湾区之光"摩天轮隔海相望。6 月日落 19:00-19:30 橘色晚霞。</p>
+      <div class="price">免费</div>
+    </div>
+
+    <div class="card">
+      <h4>2. 人才公园 · 无人机外卖</h4>
+      <div class="meta">📍 南山区科苑南路 3329 号 · 2/11 号线后海站</div>
+      <p>**美团无人机常态化配送航线**（2023.9 开航）。打开美团 App 搜"美团无人机"→ 选空投柜点餐 → 15 分钟送达。同时拍春笋 6 大机位。</p>
+      <p style="margin-top:8px;"><strong style="color:#8a2be2;">💜 必体验：低空经济的"中国名片"</strong></p>
+      <div class="price">免费（餐食 ¥40 起）</div>
+    </div>
+
+    <div class="card">
+      <h4>3. 拓竹科技深圳店</h4>
+      <div class="meta">📍 深圳湾万象城 B1 · 紧邻人才公园</div>
+      <p>**全球首家 3D 打印直营旗舰店**（2025.9 开业）。28 台 3D 打印机墙 + 超大沙盘 + CyberBrick 火车。**创始团队来自大疆**。</p>
+      <div class="price">免费看</div>
+    </div>
+
+    <div class="card">
+      <h4>4. 大疆欢乐海岸旗舰店</h4>
+      <div class="meta">📍 南山区白石路东 8 号欢乐海岸</div>
+      <p>800㎡ 全球首家旗舰店，飞行演示 + 试飞体验。瑞士朋友可亲手玩无人机。无须预约。</p>
+      <div class="price">免费</div>
+    </div>
+
+    <div class="card">
+      <h4>5. 当代艺术与城市规划馆</h4>
+      <div class="meta">📍 福田福中路 184 号 · 3/4 号线少年宫 A2</div>
+      <p>蓝天组（Coop Himmelblau）解构主义建筑，2F 大堂异型钢结构 + 3F 城市影院 + 5F 互动城市。**17:30 停止入场**。</p>
+      <p style="margin-top:8px;"><strong style="color:#ff2a6d;">⚠️ 微信服务号实名预约</strong></p>
+      <div class="price">免费</div>
+    </div>
+
+    <div class="card">
+      <h4>6. 平安 Free Sky 云际观光层</h4>
+      <div class="meta">📍 福田益田路 5033 号 · 1/3 号线购物公园 D</div>
+      <p>599 米深圳第一高楼，116 层云际观光，547 米悬空玻璃观景台（吉尼斯认证）。**19:15 截止入园**。</p>
+      <div class="price">¥180 线上 / ¥200 现场</div>
+    </div>
+  </div>
+
+  <h2 class="section-title">🍴 福田 CBD 晚餐推荐（Free Sky 之后）</h2>
+  <div class="grid food-grid">
+    <div class="card">
+      <h4>Singer House</h4>
+      <div class="meta">Livehouse 餐酒 · 平安金融中心南塔 2 楼</div>
+      <p>**吃完直接听 live**。招牌特调 + 主食。20:00-4:00 驻唱。</p>
+      <div class="price">¥150-250</div>
+    </div>
+    <div class="card">
+      <h4>AS LOUNGE</h4>
+      <div class="meta">威士忌会所餐酒 · 卓越世纪中心 23F</div>
+      <p>CBD 顶层星空顶吧台 + 餐，**微醺看深圳夜景**。</p>
+      <div class="price">¥200-300</div>
+    </div>
+    <div class="card">
+      <h4>点都德 / 陶陶居</h4>
+      <div class="meta">粤式茶点 · PAFC Mall</div>
+      <p>**瑞士朋友接受度极高**的早午茶。虾饺、烧卖、蛋挞。</p>
+      <div class="price">¥80-150</div>
+    </div>
+    <div class="card">
+      <h4>半山腰·云南菜</h4>
+      <div class="meta">融合菜 · 深圳湾万象城</div>
+      <p>国际化程度最高中餐，瑞士朋友接受度爆表。</p>
+      <div class="price">¥130-180</div>
+    </div>
+    <div class="card">
+      <h4>乐忻皇朝汇</h4>
+      <div class="meta">江浙淮扬 · 深圳湾万象城 B1</div>
+      <p>**皇朝八色小笼包**（原味/芝士/蟹粉/川味/鹅肝/黑松露等 8 种）</p>
+      <div class="price">¥110</div>
+    </div>
+    <div class="card">
+      <h4>泰珍荟</h4>
+      <div class="meta">米其林泰国菜 · 深圳湾万象城</div>
+      <p>连续 2 年泰国米其林一星。冬阴功 + 咖喱肉蟹。</p>
+      <div class="price">¥350-400</div>
+    </div>
+  </div>
+
+  <h2 class="section-title">🌧 雨天 Plan B</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>原计划</th>
+        <th>雨天替换</th>
+        <th>理由</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>前海石公园户外段</td>
+        <td>前海万象（室内商场）</td>
+        <td>地铁前湾站直达</td>
+      </tr>
+      <tr>
+        <td>人才公园无人机外卖</td>
+        <td>无人机空投柜做"拍照打卡"，不下单</td>
+        <td>恶劣天气无人机可能停飞</td>
+      </tr>
+      <tr>
+        <td>春笋户外机位</td>
+        <td>深圳湾万象城 2F 空中花道</td>
+        <td>室内 + 绿植 + 雨景</td>
+      </tr>
+      <tr>
+        <td>拓竹 / 大疆 体验</td>
+        <td>全程室内，不受影响</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>Free Sky 顶楼</td>
+        <td>**反而更推荐**</td>
+        <td>雨雾天际线更赛博朋克</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="section-title">💰 预算拆解（人均）</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>项目</th>
+        <th>金额</th>
+        <th>说明</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>前海石公园</td><td>¥0</td><td>免费</td></tr>
+      <tr><td>无人机外卖午餐</td><td>¥30-50</td><td>汉堡套餐约 40 元</td></tr>
+      <tr><td>拓竹体验</td><td>¥0</td><td>免费看，打印另算</td></tr>
+      <tr><td>大疆欢乐海岸</td><td>¥0</td><td>免费</td></tr>
+      <tr><td>当代艺术馆</td><td>¥0</td><td>免费预约</td></tr>
+      <tr><td>晚餐</td><td>¥200-300</td><td>福田 CBD</td></tr>
+      <tr><td>酒吧 2 杯</td><td>¥150-300</td><td>鸡尾酒均价 80</td></tr>
+      <tr><td>地铁/出租</td><td>¥50-100</td><td>跳表 12.5 起</td></tr>
+      <tr style="background: rgba(0,217,255,0.1);"><td><strong>Free Sky 门票</strong></td><td><strong>¥180</strong></td><td>线上（核心体验）</td></tr>
+      <tr><td>机动/纪念品</td><td>¥200</td><td>大疆小铺/拓竹周边</td></tr>
+      <tr style="background: rgba(0,217,255,0.1);">
+        <td><strong>合计</strong></td>
+        <td><strong>¥810-1230</strong></td>
+        <td>不含大额购物</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="section-title">✅ 出发前 Checklist</h2>
+  <ul class="checklist">
+    <li><input type="checkbox" id="c1"><label for="c1"><strong>6.13 周五前</strong>：在"深圳市当代艺术与城市规划馆"微信服务号预约</label></li>
+    <li><input type="checkbox" id="c2"><label for="c2"><strong>必做</strong>：携程/美团购平安 Free Sky 门票（<strong>19:15 截止入园</strong>）</label></li>
+    <li><input type="checkbox" id="c3"><label for="c3"><strong>下载美团 App</strong>，先搜"美团无人机"看下流程（人才公园常态化配送）</label></li>
+    <li><input type="checkbox" id="c4"><label for="c4">出发前 48h 查深圳天气，备折叠伞/雨衣</label></li>
+    <li><input type="checkbox" id="c5"><label for="c5">提前订福田 CBD 晚餐（Singer House / 半山腰 / 泰珍荟）</label></li>
+    <li><input type="checkbox" id="c6"><label for="c6">高德/Apple Maps 收藏所有关键点</label></li>
+    <li><input type="checkbox" id="c7"><label for="c7">瑞士朋友：带护照</label></li>
+    <li><input type="checkbox" id="c8"><label for="c8">充电宝 + eSIM</label></li>
+    <li><input type="checkbox" id="c9"><label for="c9">薄外套（6 月商场/酒吧冷气足；当代艺术馆+Free Sky 空调都偏冷）</label></li>
+    <li><input type="checkbox" id="c10"><label for="c10">轻便运动鞋（徒步 5-7 km）</label></li>
+  </ul>
+
+  <h2 class="section-title">📚 信息源透明声明</h2>
+
+  <div class="summary">
+    <h3>主要信源（v4 重点）</h3>
+    <p>
+      <strong>前海石公园：</strong>携程（4.5 分 34 点评）/ 深圳之窗 / 抖音 / 穷游<br>
+      <strong>人才公园无人机外卖（核心新点）：</strong><br>
+      · 美团无人机官方公众号<br>
+      · 深圳新闻网（2025-9-29 夜间配送上线报道）<br>
+      · 今日头条 / 新浪财经 / 中关村在线<br>
+      · 网易（2024 日本记者体验报道）<br>
+      <strong>拓竹科技深圳店（重要更正点）：</strong><br>
+      · 腾讯网 21 世纪经济报道（2025-9-30 开业报道）<br>
+      · 本地宝（<strong>2026-05-24 最新</strong>，明确地址为深圳湾万象城 B1）<br>
+      · 搜狐 / 什么值得买 / 拓竹官网<br>
+      <strong>大疆欢乐海岸：</strong>DJI 官网 / 什么值得买 / 知乎<br>
+      <strong>当代艺术与城市规划馆：</strong>本地宝 2026-04-23 最新 / 知乎 / 大众点评<br>
+      <strong>平安 Free Sky 时间：</strong>本地宝 / 携程 / 去哪儿 / 大河票务 / 新浪 / 深圳商报（6 源一致）<br>
+      <strong>福田 CBD 餐厅：</strong>携程 / 知乎 / 微博 / 今日头条 / 抖音<br>
+      <strong>天气：</strong>深圳天气 / 中国天气 / 博查
+    </p>
+
+    <h3 style="margin-top:24px;">⚠️ 关键限制</h3>
+    <p>
+      1. <strong>小红书原文未直接拉到</strong>（反爬），攻略类用携程/本地宝等<strong>等价信源</strong>替代。<br>
+      2. <strong>无人机外卖体验受天气影响</strong>：6.14 预报大雨，无人机在恶劣天气可能停飞。建议<strong>双备份</strong>——能点外卖就在公园吃，不能就在附近餐厅（人才公园步行 5 分钟到海岸城或深圳湾万象城）。<br>
+      3. <strong>拓竹"免费打印 1 小时"</strong>：实际可能需要等，<strong>不打印的话 30 分钟看完</strong>。<br>
+      4. <strong>当代艺术馆 17:30 停止入场</strong>——硬约束。A 方案无法执行，B/C 方案可行。<br>
+      5. <strong>平安 Free Sky 入园 19:15</strong>——硬约束。<br>
+      6. <strong>6.14 临时活动</strong>：6/14 是普通周日，6/19-21 才是端午假期；前一日 6/13（周六）有龙岗龙舟赛可作为 plan B。<br>
+      7. <strong>天气</strong>：6/14 预报"大雨"，但 10 天外预报准确率仅 60-70%，<strong>建议 6.12-6.13 再次确认</strong>。<br>
+      8. <strong>部分网红餐厅需提前预约</strong>（Singer House/半山腰/泰珍荟），建议出发前 2-3 天订位。<br>
+      9. <strong>大疆天空之城（可选替代）</strong>：周末 14:00-18:00 下午段开放，需大疆员工邀请，我没员工渠道，<strong>v4 暂不安排</strong>——以欢乐海岸旗舰店为主。<br>
+      10. <strong>平安 Free Sky 兑换门票</strong>：Klook 有用户反馈扫码问题，建议直接在携程/美团上订更稳。
+    </p>
+  </div>
+
+  <h2 class="section-title">💡 我的私人推荐 · v4</h2>
+  <div class="summary">
+    <p><strong>1. 选 B 方案：</strong>如果你能接受微调顺序（当代艺术馆放到上午），Free Sky 顶楼 2.5 小时体验最完整，<strong>强烈推荐</strong>。</p>
+    <p><strong>2. 无人机外卖是 v4 最大的亮点</strong>：瑞士朋友一定会记住"外卖飞着来"。在 14:00 抵达人才公园后，<strong>13:00 前完成下单</strong>（v4 时间表 B 是 14:00-15:30 段）。<strong>雨天可能停飞</strong>——务必有 B 计划。</p>
+    <p><strong>3. 拓竹体验建议只看 + 试操作</strong>，<strong>不打印</strong>（打印要 1 小时会压缩其他点）。</p>
+    <p><strong>4. 6 个点的"出片率排序"</strong>：平安 Free Sky > 当代艺术馆 2F > 人才公园 π桥湖边 > 大疆欢乐海岸飞行演示 > 拓竹 28 台打印机墙 > 前海石公园前海石+摩天轮</p>
+    <p><strong>5. 关键对话准备</strong>：<br>
+      · 前海石公园：讲"改革开放 2.0"（自贸区）<br>
+      · 人才公园：讲"<strong>低空经济</strong>"（国家级战略）<br>
+      · 拓竹：讲"消费级 3D 打印中国全球 95% 份额"+"创始团队来自大疆"<br>
+      · 大疆：讲"全球 70% 消费级无人机市场份额"<br>
+      · 当代艺术馆：讲"蓝天组=解构主义+BMW Welt+维也纳 DC Tower"<br>
+      · Free Sky：讲"全球第四高+吉尼斯纪录+55 秒 10m/s 电梯"</p>
+    <p><strong>6. 若当天确实大雨</strong>：无人机外卖放弃（不下单），改成在附近餐厅吃饭；其他 5 个点都可在室内完成，行程依然完整。</p>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <p>报告 v4 · 生成于 2026-06-09 · 行程日期 2026-06-14（周日）</p>
+  <p>6 个核心点自西向东 · 关键约束：当代艺术馆 17:30 停止入场 + Free Sky 19:15 截止入园</p>
+  <p style="margin-top:16px; color: var(--accent);">深圳 · 中国硅谷 · 未来已来 🚀</p>
+</footer>
+
+<script>
+(function() {
+  // 6 个站点的 SVG 坐标
+  const stations = [
+    { x: 100,  y: 180, name: '前海石公园',  time: '10:00', icon: '🌊' },
+    { x: 280,  y: 180, name: '人才公园',    time: '14:00', icon: '🛩️' },
+    { x: 460,  y: 180, name: '拓竹 3D 打印', time: '15:30', icon: '🖨️' },
+    { x: 640,  y: 180, name: '大疆欢乐海岸', time: '17:00', icon: '🚁' },
+    { x: 820,  y: 180, name: '当代艺术馆',  time: '10:00 (B 方案)', icon: '🏛️' },
+    { x: 1000, y: 180, name: '平安 Free Sky', time: '19:15', icon: '🏙️' }
+  ];
+
+  const movingDot = document.querySelector('.moving-dot');
+  const pathActive = document.querySelector('.route-path-active');
+  const stationEls = document.querySelectorAll('.station');
+  const labelEls = document.querySelectorAll('.progress-label');
+  const currentNum = document.getElementById('currentNum');
+  const currentName = document.getElementById('currentName');
+  const btnRestart = document.getElementById('mapRestart');
+  const btnPause = document.getElementById('mapPause');
+
+  // 总时长：每个站点 4 秒
+  const STATION_DURATION = 4000;
+  let currentIndex = 0;
+  let paused = false;
+  let advanceTimer = null;
+
+  function setStationState(idx) {
+    stationEls.forEach((el, i) => {
+      el.classList.remove('active', 'passed');
+      if (i < idx) el.classList.add('passed');
+      else if (i === idx) el.classList.add('active');
+    });
+    labelEls.forEach((el, i) => {
+      el.classList.remove('active', 'passed');
+      if (i < idx) el.classList.add('passed');
+      else if (i === idx) el.classList.add('active');
+    });
+    const s = stations[idx];
+    if (s) {
+      currentNum.textContent = (idx + 1);
+      currentName.textContent = `${s.icon} ${s.name} · ${s.time}`;
+    }
+  }
+
+  function moveToStation(idx) {
+    if (idx >= stations.length) {
+      // 全部走完，保持在最后一个
+      idx = stations.length - 1;
+      currentIndex = idx;
+      setStationState(idx);
+      // 不停，等用户点重新播放
+      return;
+    }
+    currentIndex = idx;
+    const s = stations[idx];
+    movingDot.style.transition = 'transform 1.2s cubic-bezier(0.45, 0, 0.55, 1)';
+    movingDot.style.transform = `translate(${s.x}px, ${s.y}px)`;
+    setStationState(idx);
+  }
+
+  function advance() {
+    if (paused) return;
+    const next = currentIndex + 1;
+    if (next < stations.length) {
+      moveToStation(next);
+      advanceTimer = setTimeout(advance, STATION_DURATION);
+    }
+  }
+
+  function startAnimation() {
+    clearTimeout(advanceTimer);
+    paused = false;
+    btnPause.textContent = '⏸ 暂停';
+    // 重置 pathActive 动画
+    pathActive.style.animation = 'none';
+    void pathActive.offsetWidth; // 触发 reflow
+    pathActive.style.animation = '';
+
+    // 立即定位到第一个点（无动画）
+    movingDot.style.transition = 'none';
+    moveToStation(0);
+    // 强制 reflow
+    void movingDot.offsetWidth;
+    movingDot.style.transition = '';
+
+    // 1 秒后开始前进
+    advanceTimer = setTimeout(advance, 1000);
+  }
+
+  btnRestart.addEventListener('click', startAnimation);
+
+  btnPause.addEventListener('click', () => {
+    paused = !paused;
+    btnPause.textContent = paused ? '▶ 继续' : '⏸ 暂停';
+    if (!paused) {
+      advanceTimer = setTimeout(advance, 1000);
+    } else {
+      clearTimeout(advanceTimer);
+    }
+  });
+
+  // 标签点击跳转
+  labelEls.forEach((label, idx) => {
+    label.addEventListener('click', () => {
+      clearTimeout(advanceTimer);
+      paused = true;
+      btnPause.textContent = '▶ 继续';
+      // 立即跳转
+      movingDot.style.transition = 'transform 0.8s cubic-bezier(0.45, 0, 0.55, 1)';
+      moveToStation(idx);
+    });
+  });
+
+  // 启动
+  startAnimation();
+})();
+</script>
+
+</body>
+</html>
