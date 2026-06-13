@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SZ Reddit Leads — 深圳向导线索</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230a0e1a'/><circle cx='14' cy='14' r='8' fill='none' stroke='%2300d9ff' stroke-width='2.5'/><line x1='20' y1='20' x2='27' y2='27' stroke='%23ff2a6d' stroke-width='2.5' stroke-linecap='round'/></svg>">
+<style>
+:root {
+  --bg:#0a0e1a;--bg-soft:#131a2a;--bg-hover:#1a2440;
+  --accent:#00d9ff;--accent-2:#ff2a6d;--accent-green:#00ff88;--accent-orange:#ff9500;
+  --text:#e8eef7;--text-soft:#95a3bd;
+  --border:rgba(0,217,255,0.15);--border-active:rgba(0,217,255,0.4);
+  --radius:12px;--radius-sm:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{background:linear-gradient(135deg,#001a33 0%,#0a0e1a 50%,#1a002a 100%);padding:20px 32px;border-bottom:1px solid var(--border)}
+.header-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.logo h1{font-size:22px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.logo{display:flex;align-items:center;gap:12px}
+.badge{font-size:11px;padding:2px 10px;background:rgba(0,217,255,0.1);border:1px solid var(--border-active);border-radius:100px;color:var(--accent);font-weight:500}
+.date-nav select{background:var(--bg-soft);color:var(--text);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 14px;font-size:14px;cursor:pointer}
+.date-nav select:focus{outline:none;border-color:var(--accent)}
+
+/* Stats */
+.stats-bar{background:var(--bg-soft);border-bottom:1px solid var(--border);padding:10px 32px}
+.stats-inner{max-width:1400px;margin:0 auto;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.stat-chip{display:inline-flex;align-items:center;gap:6px;padding:4px 14px;background:var(--bg);border:1px solid var(--border);border-radius:100px;font-size:13px;color:var(--text-soft)}
+.stat-chip .count{font-weight:700;color:var(--text)}
+
+/* Main */
+.main{display:flex;max-width:1400px;margin:0 auto;width:100%;padding:0 32px}
+
+/* Sidebar */
+.sidebar{width:200px;flex-shrink:0;padding:20px 0;border-right:1px solid var(--border)}
+.sidebar-title{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-soft);margin-bottom:8px;padding:0 12px}
+.cat-btn{display:flex;align-items:center;gap:8px;width:100%;padding:8px 12px;background:0;border:0;color:var(--text-soft);font-size:14px;cursor:pointer;border-radius:var(--radius-sm);text-align:left;transition:all .15s}
+.cat-btn:hover{background:var(--bg-hover);color:var(--text)}
+.cat-btn.active{background:rgba(0,217,255,0.08);color:var(--accent)}
+.cat-btn .badge-count{font-size:12px;font-weight:600;background:var(--bg);padding:1px 8px;border-radius:100px;min-width:24px;text-align:center;margin-left:auto}
+.cat-btn.active .badge-count{background:rgba(0,217,255,0.15);color:var(--accent)}
+
+/* Content */
+.content{flex:1;padding:20px 0 20px 24px;min-width:0}
+.post-list{display:flex;flex-direction:column;gap:12px}
+
+/* Cards */
+.post-card{background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:border-color .15s}
+.post-card:hover{border-color:var(--border-active)}
+.post-card.hidden{display:none}
+.post-title{font-size:16px;font-weight:600;margin-bottom:8px}
+.post-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.tag{display:inline-flex;align-items:center;gap:4px;font-size:12px;padding:2px 10px;border-radius:100px;background:var(--bg);border:1px solid var(--border);color:var(--text-soft)}
+.tag.tour_guide{border-color:rgba(0,217,255,0.3);color:#00d9ff}
+.tag.medical{border-color:rgba(255,42,109,0.3);color:#ff2a6d}
+.tag.translation{border-color:rgba(0,255,136,0.3);color:#00ff88}
+.tag.living{border-color:rgba(255,149,0,0.3);color:#ff9500}
+
+/* Dates */
+.post-dates{display:flex;gap:16px;margin-bottom:10px;padding:8px 12px;background:var(--bg);border-radius:var(--radius-sm);border:1px solid var(--border)}
+.date-item{display:inline-flex;align-items:center;gap:6px;font-size:13px}
+.date-label{color:var(--text-soft);font-size:12px}
+.date-value{font-weight:600;color:var(--text)}
+.date-item.urgent .date-label,.date-item.urgent .date-value{color:var(--accent-2)}
+
+.post-summary{font-size:14px;color:var(--text-soft);line-height:1.7;margin-bottom:12px}
+.reddit-link{display:inline-flex;align-items:center;gap:4px;font-size:13px;padding:4px 14px;border-radius:var(--radius-sm);background:rgba(0,217,255,0.08);color:var(--accent);transition:background .15s}
+.reddit-link:hover{background:rgba(0,217,255,0.15);text-decoration:none}
+
+/* Priority */
+.priority-section{margin-top:32px;padding-top:24px;border-top:1px solid var(--border)}
+.priority-section h3{font-size:16px;margin-bottom:12px;color:var(--accent-2)}
+.priority-content{font-size:14px;color:var(--text-soft);line-height:1.7;white-space:pre-line}
+
+/* Empty */
+.empty-state{text-align:center;padding:60px 20px;color:var(--text-soft)}
+.empty-state .emoji{font-size:48px;margin-bottom:16px}
+
+/* Footer */
+.footer{text-align:center;padding:20px;color:var(--text-soft);font-size:12px;border-top:1px solid var(--border);margin-top:auto}
+
+/* Mobile */
+@media(max-width:768px){
+  .header-inner{flex-direction:column;align-items:flex-start}
+  .main{flex-direction:column;padding:0 16px}
+  .sidebar{width:100%;border-right:0;border-bottom:1px solid var(--border);padding:12px 0}
+  .sidebar-title{display:none}
+  .sidebar-section{display:flex;gap:4px;flex-wrap:wrap}
+  .cat-btn{width:auto;padding:6px 10px;font-size:13px}
+  .content{padding:12px 0}
+  .post-dates{flex-direction:column;gap:6px}
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <h1>SZ Reddit Leads</h1>
+      <span class="badge">深圳向导线索</span>
+    </div>
+    <div class="date-nav">
+      <select id="dateSelect"></select>
+    </div>
+  </div>
+</div>
+<div class="stats-bar"><div class="stats-inner" id="statsBar"></div></div>
+<div class="main">
+  <div class="sidebar">
+    <div class="sidebar-section" id="sidebar"></div>
+  </div>
+  <div class="content">
+    <div class="post-list" id="postList"></div>
+    <div id="prioritySection"></div>
+  </div>
+</div>
+<div class="footer">每日 10:03 自动更新 · Powered by Claude WebSearch + Vercel</div>
+
+<script>
+const CAT_META = {
+  all:        { emoji: '📋', label: '全部' },
+  tour_guide: { emoji: '✈️', label: '旅游向导' },
+  medical:    { emoji: '🏥', label: '医疗协助' },
+  translation:{ emoji: '🗣️', label: '翻译协助' },
+  living:     { emoji: '🏠', label: '生活帮助' },
+  general:    { emoji: '📌', label: '其他' },
+};
+
+let reports = [];
+let dates = [];
+let activeCategory = 'all';
+let activeDate = '';
+
+async function init() {
+  try {
+    const [postsRes, datesRes] = await Promise.all([
+      fetch('data/posts.json'),
+      fetch('data/dates.json'),
+    ]);
+    const postsData = await postsRes.json();
+    reports = postsData.reports || [];
+    dates = await datesRes.json();
+  } catch (e) {
+    document.getElementById('postList').innerHTML =
+      '<div class="empty-state"><div class="emoji">⚠️</div><h3>数据加载失败</h3><p>' + e.message + '</p></div>';
+    return;
+  }
+
+  // Populate date selector
+  const sel = document.getElementById('dateSelect');
+  dates.forEach(d => {
+    const opt = document.createElement('option');
+    opt.value = d; opt.textContent = d;
+    sel.appendChild(opt);
+  });
+  activeDate = dates[0] || '';
+  sel.value = activeDate;
+  sel.addEventListener('change', () => { activeDate = sel.value; render(); });
+
+  render();
+}
+
+function getReport(date) {
+  return reports.find(r => r.date === date);
+}
+
+function render() {
+  const report = getReport(activeDate);
+  if (!report) {
+    document.getElementById('postList').innerHTML =
+      '<div class="empty-state"><div class="emoji">🔍</div><h3>暂无数据</h3></div>';
+    document.getElementById('prioritySection').innerHTML = '';
+    renderStats(0, {});
+    renderSidebar({});
+    return;
+  }
+
+  const posts = activeCategory === 'all'
+    ? report.posts
+    : report.posts.filter(p => p.category === activeCategory);
+
+  // Stats
+  const counts = {};
+  report.posts.forEach(p => { counts[p.category] = (counts[p.category] || 0) + 1; });
+  renderStats(report.posts.length, counts);
+  renderSidebar(counts);
+
+  // Posts
+  const list = document.getElementById('postList');
+  if (posts.length === 0) {
+    list.innerHTML = '<div class="empty-state"><div class="emoji">📭</div><h3>该分类下暂无帖子</h3></div>';
+  } else {
+    list.innerHTML = posts.map(p => renderCard(p)).join('');
+  }
+
+  // Priority
+  const pri = document.getElementById('prioritySection');
+  if (report.priority) {
+    pri.innerHTML = '<div class="priority-section"><h3>💡 重点关注</h3><div class="priority-content">' +
+      escapeHtml(report.priority) + '</div></div>';
+  } else {
+    pri.innerHTML = '';
+  }
+}
+
+function renderCard(post) {
+  const catMeta = CAT_META[post.category] || CAT_META.general;
+  const isUrgent = post.plannedDate && post.plannedDate !== '未提及' && post.plannedDate !== '未知';
+  return `<div class="post-card" data-category="${post.category}">
+  <div class="post-title">${escapeHtml(post.title)}</div>
+  <div class="post-meta">
+    <span class="tag ${post.category}">${catMeta.emoji} ${escapeHtml(post.categoryRaw)}</span>
+    <span class="tag">${escapeHtml(post.subreddit)}</span>
+    <span class="tag">👤 ${escapeHtml(post.author)}</span>
+  </div>
+  <div class="post-dates">
+    <span class="date-item"><span class="date-label">📝 发布</span><span class="date-value">${escapeHtml(post.postDate)}</span></span>
+    <span class="date-item${isUrgent ? ' urgent' : ''}"><span class="date-label">🚀 计划来深</span><span class="date-value">${escapeHtml(post.plannedDate)}</span></span>
+  </div>
+  <div class="post-summary">${escapeHtml(post.summary)}</div>
+  <a href="${post.url}" target="_blank" rel="noopener noreferrer" class="reddit-link">在 Reddit 中打开 →</a>
+</div>`;
+}
+
+function renderStats(total, counts) {
+  const el = document.getElementById('statsBar');
+  let html = `<span class="stat-chip">📊 总计 <span class="count">${total}</span> 条</span>`;
+  for (const [key, meta] of Object.entries(CAT_META)) {
+    if (key === 'all') continue;
+    const c = counts[key] || 0;
+    if (c > 0) html += `<span class="stat-chip">${meta.emoji} ${meta.label} <span class="count">${c}</span></span>`;
+  }
+  el.innerHTML = html;
+}
+
+function renderSidebar(counts) {
+  const el = document.getElementById('sidebar');
+  const total = Object.values(counts).reduce((a, b) => a + b, 0);
+  let html = '<div class="sidebar-title">分类筛选</div>';
+  for (const [key, meta] of Object.entries(CAT_META)) {
+    if (key === 'general') continue;
+    const c = key === 'all' ? total : (counts[key] || 0);
+    const cls = activeCategory === key ? ' active' : '';
+    html += `<button class="cat-btn${cls}" data-cat="${key}" onclick="setCategory('${key}')">
+      <span>${meta.emoji}</span><span>${meta.label}</span><span class="badge-count">${c}</span></button>`;
+  }
+  el.innerHTML = html;
+}
+
+function setCategory(cat) {
+  activeCategory = cat;
+  render();
+}
+
+function escapeHtml(s) {
+  if (!s) return '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+init();
+</script>
+</body>
+</html>

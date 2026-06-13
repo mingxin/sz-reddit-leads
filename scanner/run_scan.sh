@@ -52,6 +52,8 @@ fi
 - **链接**: URL
 - **Subreddit**: r/xxx
 - **作者**: u/xxx
+- **发布时间**: 帖子发布日期（从搜索结果推断，格式 YYYY-MM-DD，无法确定则写\"未知\"）
+- **计划来深圳时间**: 客户提到计划何时来深圳或需要服务的时间（从帖子内容推断，格式 YYYY-MM-DD 或\"本周\"\"下月\"等，未提及则写\"未提及\"）
 - **需求类型**: 旅游向导/医疗/翻译/生活帮助
 
 **内容摘要**：（3-5句话）
@@ -80,21 +82,20 @@ else
     exit $EXIT_CODE
 fi
 
-# === Post-scan: 解析报告 → 生成JSON → 推送到GitHub ===
+# === Post-scan: 解析报告 → 生成JSON → 推送 → 自动部署 ===
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] 开始解析报告..." >> "$LOG_FILE"
 
-cd "$PROJECT_DIR/dashboard"
-npx tsx scripts/parse-reports.ts >> "$LOG_FILE" 2>&1
+python3 "$SCRIPT_DIR/parse_reports.py" >> "$LOG_FILE" 2>&1
 
 if [ $? -eq 0 ]; then
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] 解析成功，开始推送..." >> "$LOG_FILE"
     cd "$PROJECT_DIR"
-    git add scanner/reports/ dashboard/src/data/
+    git add scanner/reports/ dashboard/data/
     git diff --cached --quiet
     if [ $? -ne 0 ]; then
         git commit -m "daily: $(date +%Y-%m-%d) report" >> "$LOG_FILE" 2>&1
-        git push origin main >> "$LOG_FILE" 2>&1
-        echo "[$(date '+%Y-%m-%d %H:%M:%S')] 推送完成，GitHub Actions将自动部署" >> "$LOG_FILE"
+        git -c http.version=HTTP/1.1 push origin main >> "$LOG_FILE" 2>&1
+        echo "[$(date '+%Y-%m-%d %H:%M:%S')] 推送完成，Vercel将自动部署" >> "$LOG_FILE"
     else
         echo "[$(date '+%Y-%m-%d %H:%M:%S')] 无变更需要提交" >> "$LOG_FILE"
     fi
