@@ -5,3 +5,4 @@ scanner/cron.log
 scanner/.env
 .env
 *.pyc
+.vercel

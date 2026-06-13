@@ -23,6 +23,12 @@ def normalize(raw):
             return cat
     return "general"
 
+def clean_post_date(raw_date):
+    """清理发布时间字段"""
+    if not raw_date or raw_date.strip() in ("未知", ""):
+        return "未知"
+    return raw_date.strip()
+
 def parse_report(filepath, filename):
     content = open(filepath, encoding="utf-8").read()
     date = filename.replace(".md", "")
@@ -48,6 +54,9 @@ def parse_report(filepath, filename):
         if not url_val:
             continue
 
+        raw_date = post_date.group(1).strip() if post_date else "未知"
+        final_date = clean_post_date(raw_date)
+
         posts.append({
             "id": pid,
             "title": title,
@@ -56,7 +65,7 @@ def parse_report(filepath, filename):
             "author": author.group(1).strip() if author else "未知",
             "category": normalize(cat.group(1) if cat else ""),
             "categoryRaw": cat.group(1).strip() if cat else "general",
-            "postDate": post_date.group(1).strip() if post_date else "未知",
+            "postDate": final_date,
             "plannedDate": planned.group(1).strip() if planned else "未提及",
             "summary": summary.group(1).replace("\n", " ").strip() if summary else "",
         })

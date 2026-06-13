@@ -25,13 +25,15 @@ fi
 你是深圳本地向导服务的市场调研员。今天是 $(date +%Y-%m-%d)。
 
 ## 步骤1：搜索
-用WebSearch搜索以下关键词，每个搜一次（结果去重）：
+用WebSearch搜索以下关键词，每个搜一次（结果去重）。搜索时注意观察搜索结果中每个帖子显示的发布时间：
 1. \"shenzhen guide\" site:reddit.com
 2. \"shenzhen travel help\" site:reddit.com
 3. \"shenzhen hospital\" OR \"shenzhen medical\" site:reddit.com
 4. \"visit shenzhen\" OR \"shenzhen trip\" site:reddit.com
 5. \"shenzhen translator\" OR \"shenzhen local help\" site:reddit.com
 6. \"moving to shenzhen\" OR \"shenzhen expat\" site:reddit.com
+
+重要：搜索结果中通常会显示帖子的发布时间（如\"3 days ago\"、\"2 weeks ago\"、\"1 month ago\"或具体日期）。你必须记录每条帖子的发布时间，并根据今天 $(date +%Y-%m-%d) 换算成 YYYY-MM-DD 格式。
 
 ## 步骤2：筛选
 只保留外国人需要深圳本地帮助的帖子（找向导、旅游、医疗、翻译、生活帮助）。
@@ -52,7 +54,7 @@ fi
 - **链接**: URL
 - **Subreddit**: r/xxx
 - **作者**: u/xxx
-- **发布时间**: 帖子发布日期（从搜索结果推断，格式 YYYY-MM-DD，无法确定则写\"未知\"）
+- **发布时间**: 必须填写！搜索结果中通常有发布日期或\"X days/weeks/months ago\"等相对时间。根据今天 $(date +%Y-%m-%d) 换算成 YYYY-MM-DD 格式。如果搜索摘要里没有，就点开帖子链接查看发布日期。实在找不到才写\"未知\"。
 - **计划来深圳时间**: 客户提到计划何时来深圳或需要服务的时间（从帖子内容推断，格式 YYYY-MM-DD 或\"本周\"\"下月\"等，未提及则写\"未提及\"）
 - **需求类型**: 旅游向导/医疗/翻译/生活帮助
 
