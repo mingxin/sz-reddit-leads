@@ -4,10 +4,14 @@
 用法: python3 scanner/parse_reports.py
 """
 import json, re, os, sys
+from datetime import datetime, timedelta
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REPORTS_DIR = os.path.join(PROJECT_DIR, "scanner", "reports")
 DATA_DIR = os.path.join(PROJECT_DIR, "dashboard", "data")
+
+# 只保留最近30天的帖子
+MAX_AGE_DAYS = 30
 
 CATEGORIES = {
     "tour_guide": ["旅游", "向导", "guide", "tour", "trip", "travel", "visit", "游览", "景点"],
@@ -24,17 +28,68 @@ def normalize(raw):
     return "general"
 
 def clean_post_date(raw_date):
-    """清理发布时间字段"""
+    """清理发布时间字段，提取YYYY-MM-DD部分"""
     if not raw_date or raw_date.strip() in ("未知", ""):
         return "未知"
-    return raw_date.strip()
+    raw_date = raw_date.strip()
+    # 提取日期部分（去掉"（推断）"等后缀）
+    m = re.search(r'(\d{4}-\d{2}-\d{2})', raw_date)
+    if m:
+        return m.group(1)
+    return raw_date
+
+def parse_relative_age(date_str):
+    """从日期字符串解析出datetime，用于计算相对时间"""
+    if not date_str or date_str == "未知":
+        return None
+    m = re.search(r'(\d{4}-\d{2}-\d{2})', date_str)
+    if m:
+        try:
+            return datetime.strptime(m.group(1), "%Y-%m-%d")
+        except ValueError:
+            pass
+    return None
+
+def relative_age_label(dt, now=None):
+    """计算相对时间标签，如 '3天前'、'2周前'"""
+    if dt is None:
+        return ""
+    if now is None:
+        now = datetime.now()
+    delta = now - dt
+    days = delta.days
+    if days < 0:
+        return ""
+    if days == 0:
+        return "今天"
+    if days == 1:
+        return "昨天"
+    if days < 7:
+        return f"{days}天前"
+    if days < 30:
+        return f"{days // 7}周前"
+    if days < 365:
+        return f"{days // 30}个月前"
+    return f"{days // 365}年前"
+
+def is_within_month(date_str, now=None):
+    """判断帖子是否在最近一个月内发布"""
+    dt = parse_relative_age(date_str)
+    if dt is None:
+        # 未知日期的帖子保留（可能是今天的新帖子，Claude没提取到日期）
+        return True
+    if now is None:
+        now = datetime.now()
+    return (now - dt).days <= MAX_AGE_DAYS
 
 def parse_report(filepath, filename):
     content = open(filepath, encoding="utf-8").read()
     date = filename.replace(".md", "")
+    now = datetime.now()
 
     sections = re.split(r"\n(?=## \d+\. )", content)
     posts = []
+    skipped = 0
     for sec in sections:
         m = re.match(r"^## (\d+)\.\s*(.+)", sec)
         if not m:
@@ -54,8 +109,16 @@ def parse_report(filepath, filename):
         if not url_val:
             continue
 
-        raw_date = post_date.group(1).strip() if post_date else "未知"
-        final_date = clean_post_date(raw_date)
+        final_date = clean_post_date(post_date.group(1).strip() if post_date else "未知")
+
+        # 过滤：只保留最近30天
+        if not is_within_month(final_date, now):
+            skipped += 1
+            continue
+
+        # 计算相对时间
+        post_dt = parse_relative_age(final_date)
+        age_label = relative_age_label(post_dt, now)
 
         posts.append({
             "id": pid,
@@ -66,12 +129,15 @@ def parse_report(filepath, filename):
             "category": normalize(cat.group(1) if cat else ""),
             "categoryRaw": cat.group(1).strip() if cat else "general",
             "postDate": final_date,
+            "postAge": age_label,
             "plannedDate": planned.group(1).strip() if planned else "未提及",
             "summary": summary.group(1).replace("\n", " ").strip() if summary else "",
         })
 
     pri = re.search(r"## 💡 重点关注([\s\S]*?)$", content)
     priority = pri.group(1).strip() if pri else ""
+
+    print(f"  {date}: {len(posts)} posts kept, {skipped} older than {MAX_AGE_DAYS} days filtered out")
 
     return {"date": date, "totalCount": len(posts), "posts": posts, "priority": priority}
 
@@ -84,7 +150,6 @@ def main():
             continue
         report = parse_report(os.path.join(REPORTS_DIR, f), f)
         reports.append(report)
-        print(f"Parsed {report['date']}: {len(report['posts'])} posts")
 
     reports.sort(key=lambda r: r["date"], reverse=True)
 
@@ -95,7 +160,8 @@ def main():
     with open(os.path.join(DATA_DIR, "dates.json"), "w", encoding="utf-8") as out:
         json.dump(dates, out)
 
-    print(f"Done! {len(reports)} reports, {sum(len(r['posts']) for r in reports)} total posts")
+    total = sum(len(r["posts"]) for r in reports)
+    print(f"Done! {len(reports)} reports, {total} posts (last {MAX_AGE_DAYS} days only)")
 
 if __name__ == "__main__":
     main()

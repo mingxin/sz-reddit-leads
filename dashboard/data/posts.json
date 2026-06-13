@@ -12,7 +12,8 @@
           "author": "未知",
           "category": "tour_guide",
           "categoryRaw": "旅游向导",
-          "postDate": "2026-06-12（推断）",
+          "postDate": "2026-06-12",
+          "postAge": "昨天",
           "plannedDate": "2026-06-14（明天周日）",
           "summary": "两名28岁男性游客周日（6月14日）在深圳，寻找本地向导，不要求专业导游，只要熟悉本地即可。时间紧迫，明天就到。"
         },
@@ -25,6 +26,7 @@
           "category": "tour_guide",
           "categoryRaw": "旅游向导",
           "postDate": "未知",
+          "postAge": "",
           "plannedDate": "发布后一周",
           "summary": "来自英国的旅行者，一周后到深圳，发现市面上几乎没有深圳的英文旅游指南或信息，在Reddit求助。反映了外国人来深圳信息获取困难的问题。"
         },
@@ -37,6 +39,7 @@
           "category": "tour_guide",
           "categoryRaw": "旅游向导",
           "postDate": "未知",
+          "postAge": "",
           "plannedDate": "未提及",
           "summary": "旅行者寻求来深圳的实用建议，包括支付设置（推荐提前安装支付宝并绑定Wise卡）、机场附近活动等。需要本地人提供落地后的实操指导。"
         },
@@ -49,6 +52,7 @@
           "category": "tour_guide",
           "categoryRaw": "旅游向导",
           "postDate": "未知",
+          "postAge": "",
           "plannedDate": "未提及",
           "summary": "即将来深圳的外国人请求行前准备建议。社区推荐下载翻译APP、VPN、搜索引擎、电子钱包、外卖和购物APP。核心需求是\"来之前该准备什么\"的本地知识。"
         },
@@ -61,6 +65,7 @@
           "category": "tour_guide",
           "categoryRaw": "旅游向导",
           "postDate": "未知",
+          "postAge": "",
           "plannedDate": "未提及",
           "summary": "美国公民首次来深圳，询问外币兑换、ATM取现、WhatsApp使用、Google Maps导航等实际问题。典型的\"第一次来中国\"的外国人需求。"
         },
@@ -73,6 +78,7 @@
           "category": "tour_guide",
           "categoryRaw": "旅游向导",
           "postDate": "未知",
+          "postAge": "",
           "plannedDate": "未提及",
           "summary": "对科技和创业感兴趣的旅行者，计划在深圳待6天，寻找值得体验的活动和地点。明确提到科技方向，适合定制化科技主题行程。"
         },
@@ -85,6 +91,7 @@
           "category": "tour_guide",
           "categoryRaw": "旅游向导",
           "postDate": "未知",
+          "postAge": "",
           "plannedDate": "8月",
           "summary": "计划8月来深圳的旅行者，需要帮助完善行程安排，同时还在规划中国其他城市的路线。需要本地人来帮忙规划深圳部分的行程。"
         },
@@ -97,6 +104,7 @@
           "category": "tour_guide",
           "categoryRaw": "旅游向导",
           "postDate": "未知",
+          "postAge": "",
           "plannedDate": "未提及",
           "summary": "外国人询问在深圳如何处理支付问题。社区建议办理中国SIM卡以便更顺畅地使用本地支付服务。涉及支付宝、微信支付等实际操作指导。"
         },
@@ -109,6 +117,7 @@
           "category": "tour_guide",
           "categoryRaw": "旅游向导",
           "postDate": "未知",
+          "postAge": "",
           "plannedDate": "未提及",
           "summary": "第一次来中国的游客，获得来深圳的机会，请求行程规划建议——该做什么、如何准备、整体行程组织。典型的初次访华需求。"
         },
@@ -121,6 +130,7 @@
           "category": "tour_guide",
           "categoryRaw": "旅游向导",
           "postDate": "未知",
+          "postAge": "",
           "plannedDate": "未提及",
           "summary": "一群朋友计划来深圳，向本地人和有经验的旅行者询问必去景点的推荐。"
         },
@@ -133,6 +143,7 @@
           "category": "tour_guide",
           "categoryRaw": "旅游向导",
           "postDate": "未知",
+          "postAge": "",
           "plannedDate": "未提及",
           "summary": "计划香港-深圳联游的旅行者，寻求跨境交通建议，包括渡轮和口岸过关的实操信息。"
         },
@@ -145,6 +156,7 @@
           "category": "tour_guide",
           "categoryRaw": "旅游向导",
           "postDate": "未知",
+          "postAge": "",
           "plannedDate": "未提及",
           "summary": "计划深圳短途游，寻求行程建议。涉及交通APP推荐、深圳vs广州对比、最佳游玩季节和市内交通方式。"
         },
@@ -157,6 +169,7 @@
           "category": "tour_guide",
           "categoryRaw": "旅游向导",
           "postDate": "未知",
+          "postAge": "",
           "plannedDate": "未提及",
           "summary": "澳大利亚游客计划从香港去深圳，询问签证要求。深圳144小时过境免签政策可能适用，但用户不清楚具体流程。"
         },
@@ -169,6 +182,7 @@
           "category": "living",
           "categoryRaw": "生活帮助",
           "postDate": "未知",
+          "postAge": "",
           "plannedDate": "未提及",
           "summary": "南非人准备搬到深圳教英语几年，第一次来中国，询问生活建议。涵盖住房、社交、日常等全方位需求。"
         },
@@ -181,6 +195,7 @@
           "category": "living",
           "categoryRaw": "生活帮助",
           "postDate": "未知",
+          "postAge": "",
           "plannedDate": "未提及",
           "summary": "社交媒体经理即将搬到深圳龙华区的科技公司工作，询问需要注意的事项。需要在本地生活、交通、社区方面的指导。"
         },
@@ -193,6 +208,7 @@
           "category": "living",
           "categoryRaw": "生活帮助",
           "postDate": "未知",
+          "postAge": "",
           "plannedDate": "已到达",
           "summary": "刚搬到深圳的外国人，寻找外国人社群和社交圈子。需要本地人带路、介绍社区和活动。"
         },
@@ -205,6 +221,7 @@
           "category": "living",
           "categoryRaw": "生活帮助",
           "postDate": "未知",
+          "postAge": "",
           "plannedDate": "未提及",
           "summary": "在中国生活约15年（主要在上海）的人搬到深圳，询问哪个区域适合居住。需要本地人提供各区域的实际生活体验对比。"
         },
@@ -217,6 +234,7 @@
           "category": "living",
           "categoryRaw": "生活帮助",
           "postDate": "未知",
+          "postAge": "",
           "plannedDate": "未提及",
           "summary": "加拿大人来深圳做3个月实习，第一次在中国生活，寻求全方位指导。"
         },
@@ -229,6 +247,7 @@
           "category": "living",
           "categoryRaw": "生活帮助",
           "postDate": "未知",
+          "postAge": "",
           "plannedDate": "发布后一个月",
           "summary": "即将搬到南山区的人，带着妻子一起，寻求住宿区域推荐。需要了解南山各片区的生活便利性、价格等信息。"
         },
@@ -241,6 +260,7 @@
           "category": "living",
           "categoryRaw": "生活帮助",
           "postDate": "未知",
+          "postAge": "",
           "plannedDate": "未提及",
           "summary": "外籍人士永久搬迁到龙华区，寻求实用建议和日常问题解答。"
         },
@@ -253,6 +273,7 @@
           "category": "living",
           "categoryRaw": "生活帮助",
           "postDate": "2023-12",
+          "postAge": "",
           "plannedDate": "2024-02",
           "summary": "苏格兰英语教师计划2024年2月搬到深圳，询问注意事项和建议。"
         },
@@ -265,6 +286,7 @@
           "category": "living",
           "categoryRaw": "生活帮助",
           "postDate": "未知",
+          "postAge": "",
           "plannedDate": "未提及",
           "summary": "26岁女性询问搬到深圳的综合建议。涵盖安全、社交、工作、生活等方面。"
         }

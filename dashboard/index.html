@@ -67,6 +67,7 @@ a:hover{text-decoration:underline}
 .date-label{color:var(--text-soft);font-size:12px}
 .date-value{font-weight:600;color:var(--text)}
 .date-item.urgent .date-label,.date-item.urgent .date-value{color:var(--accent-2)}
+.age-badge{font-size:11px;padding:1px 8px;border-radius:100px;background:rgba(0,217,255,0.1);color:var(--accent);margin-left:6px}
 
 .post-summary{font-size:14px;color:var(--text-soft);line-height:1.7;margin-bottom:12px}
 .reddit-link{display:inline-flex;align-items:center;gap:4px;font-size:13px;padding:4px 14px;border-radius:var(--radius-sm);background:rgba(0,217,255,0.08);color:var(--accent);transition:background .15s}
@@ -219,7 +220,7 @@ function renderCard(post) {
     <span class="tag">👤 ${escapeHtml(post.author)}</span>
   </div>
   <div class="post-dates">
-    <span class="date-item"><span class="date-label">📝 发布</span><span class="date-value">${escapeHtml(post.postDate)}</span></span>
+    <span class="date-item"><span class="date-label">📝 发布</span><span class="date-value">${escapeHtml(post.postDate)}</span>${post.postAge ? '<span class="age-badge">' + escapeHtml(post.postAge) + '</span>' : ''}</span>
     <span class="date-item${isUrgent ? ' urgent' : ''}"><span class="date-label">🚀 计划来深</span><span class="date-value">${escapeHtml(post.plannedDate)}</span></span>
   </div>
   <div class="post-summary">${escapeHtml(post.summary)}</div>
